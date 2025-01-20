@@ -4,6 +4,7 @@ import Home from "../Page/Home/Home";
 import Menu from "../Page/Menu/Menu";
 import Signup from "../Components/Signup";
 import Profile from "../Page/Dashboard/Profile";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 
 
@@ -22,7 +23,7 @@ export const router = createBrowserRouter([
       },
       {
         path : '/profile',
-        element : <Profile></Profile>
+        element : <PrivateRoute><Profile></Profile></PrivateRoute>
       },
     ]
   },
