@@ -13,7 +13,6 @@ const Signup = () => {
   const onSubmit = (data) => {
     setUser(data)
     navigate('/')
-    console.log(data)
   }
 
   return (

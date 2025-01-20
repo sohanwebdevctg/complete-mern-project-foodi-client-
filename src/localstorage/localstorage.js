@@ -3,5 +3,8 @@ export const setUser = (data) => {
 }
 
 export const getUser = () => {
-  localStorage.getItem('user')
+  const items = JSON.parse(localStorage.getItem('user'));
+  if (items) {
+   return items;
+  }
 }
