@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom';
 import logo from '/logo.png'
 import Login from './Login';
+import { AuthContext } from '../Context/AuthProvider';
+import { useContext } from 'react';
+import DrawerLink from './DrawerLink';
 
 const Navbar = () => {
+
+  // auth context data
+    const {user} = useContext(AuthContext)
 
   const navLink = (
     <>
@@ -107,7 +113,10 @@ const Navbar = () => {
             <span className="badge badge-sm indicator-item">8</span>
           </div>
           </div>
-          <button onClick={()=>document.getElementById('my_modal_1').showModal()} className="py-2 px-4 bg-green-500 hover:bg-green-500 text-white rounded-3xl">Login</button>
+          {
+            user ? <DrawerLink></DrawerLink> : <button onClick={()=>document.getElementById('my_modal_1').showModal()} className="py-2 px-4 bg-green-500 hover:bg-green-500 text-white rounded-3xl">Login</button> 
+          }
+          
           <Login></Login>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider";
 import { useForm } from "react-hook-form";
 
@@ -8,6 +8,8 @@ const Login = () => {
   // auth context data
   const {user} = useContext(AuthContext)
 
+  const navigate = useNavigate();
+
   // react hook data
   const {register,handleSubmit,formState: { errors }} = useForm()
 
@@ -15,9 +17,11 @@ const Login = () => {
     const email = data.email;
     const password = data.password;
     if(user.email === email && user.password === password){
+      document.getElementById('my_modal_1').close();
       console.log('success')
+      window.location.reload()
+      navigate('/')
     }
-    document.getElementById('my_modal_1').close();
   }
 
   return (
