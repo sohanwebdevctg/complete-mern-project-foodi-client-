@@ -5,6 +5,7 @@ import Menu from "../Page/Menu/Menu";
 import Signup from "../Components/Signup";
 import Profile from "../Page/Dashboard/Profile";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import Carts from "../Page/Dashboard/Carts";
 
 
 
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path : '/profile',
         element : <PrivateRoute><Profile></Profile></PrivateRoute>
+      },
+      {
+        path : '/carts',
+        element : <PrivateRoute><Carts></Carts></PrivateRoute>
       },
     ]
   },
