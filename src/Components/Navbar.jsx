@@ -97,6 +97,7 @@ const Navbar = () => {
       </svg>
     </button>
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+          <Link to="/carts">
           <div className="indicator">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -112,6 +113,7 @@ const Navbar = () => {
             </svg>
             <span className="badge badge-sm indicator-item">8</span>
           </div>
+          </Link>
           </div>
           {
             user ? <DrawerLink></DrawerLink> : <button onClick={()=>document.getElementById('my_modal_1').showModal()} className="py-2 px-4 bg-green-500 hover:bg-green-500 text-white rounded-3xl">Login</button> 

@@ -18,9 +18,11 @@ const DrawerLink = () => {
   <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
   <div className="drawer-content">
     {/* Page content here */}
-    <label htmlFor="my-drawer-4" className="drawer-button"><img
-            alt="Tailwind CSS Navbar component"
-            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" className="w-10 rounded-full"/></label>
+    <label htmlFor="my-drawer-4" className="drawer-button"><div className="avatar online placeholder">
+  <div className="bg-neutral text-neutral-content w-10 rounded-full">
+    <span className="text-xl">AI</span>
+  </div>
+</div></label>
   </div>
   <div className="drawer-side">
     <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
