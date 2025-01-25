@@ -1,9 +1,21 @@
 import { useContext } from "react";
 import { AuthContext } from './../../Context/AuthProvider';
+import useCard from "../../hooks/useCard";
 
 const Carts = () => {
 
-  const {user} = useContext(AuthContext)
+  const {user} = useContext(AuthContext);
+
+  const [card] = useCard();
+  const sumWithInitial = card.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.price,
+    0,
+  );
+  console.log(card)
+
+  const deleteBtn = (id) => {
+    console.log(id)
+  }
 
   return (
     <div className="hero bg-base-200 min-h-screen">
@@ -28,30 +40,28 @@ const Carts = () => {
               </tr>
             </thead>
             <tbody>
-              {/* row 1 */}
-              <tr>
-                <td>1</td>
+              {
+                card.map((item, index) =><tr key={item._id}>
+                <td>{++index}</td>
                 <td>
                   <div className="avatar">
                     <div className="mask mask-squircle h-12 w-12">
                       <img
-                        src="https://img.daisyui.com/images/profile/demo/2@94.webp"
+                        src={item?.image}
                         alt="Avatar Tailwind CSS Component"
                       />
                     </div>
                   </div>
                 </td>
-                <td>Zemlak, Daniel and Leannon</td>
-                <td>Purple</td>
+                <td>{item?.recipe.slice(0,25)}</td>
+                <td>{item?.quantity}</td>
+                <td>{item?.price}</td>
                 <th>
-                  <button className="btn btn-ghost btn-xs">details</button>
+                  <button onClick={() => deleteBtn(item._id)} className="btn btn-error btn-xs text-white">Delete</button>
                 </th>
-                <th>
-                  <button className="btn btn-error btn-xs text-white">
-                    Delete
-                  </button>
-                </th>
-              </tr>
+              </tr>)
+              }
+
             </tbody>
           </table>
         </div>
@@ -66,8 +76,8 @@ const Carts = () => {
           </ul>
           <ul className="w-1/2 text-left">
             <li><h1 className="text-xl font-bold">Shopping Details</h1></li>
-            <li>Total Items : 0</li>
-            <li>Total Price : $23.00</li>
+            <li>Total Items : {card?.length}</li>
+            <li>Total Price : ${sumWithInitial}</li>
             <li><button className="btn btn-success text-white">Procceed to Checkout</button></li>
           </ul>
         </div>
