@@ -6,12 +6,13 @@ const Foods = () => {
   const [filterData, setFilterData] = useState([])
 
   useEffect(() => {
-    fetch("./menu.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setRecipes(data);
-        setFilterData(data)
-      });
+    const getMenuData = async () => {
+      const response = await fetch("http://localhost:3000/menu")
+      const menus = await response.json()
+      setRecipes(menus);
+      setFilterData(menus)
+    }
+      getMenuData()
   }, []);
 
   const buttonData = (data) => {
