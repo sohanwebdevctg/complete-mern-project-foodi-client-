@@ -1,20 +1,28 @@
 import { useContext } from "react";
 import { AuthContext } from './../../Context/AuthProvider';
-import useCard from "../../hooks/useCard";
+import useCarts from "../../hooks/useCarts";
+
 
 const Carts = () => {
 
   const {user} = useContext(AuthContext);
 
-  const [card] = useCard();
-  const sumWithInitial = card.reduce(
+  const [carts,refetch] = useCarts();
+  const sumWithInitial = carts.reduce(
     (accumulator, currentValue) => accumulator + currentValue.price,
     0,
   );
-  console.log(card)
 
   const deleteBtn = (id) => {
-    console.log(id)
+    fetch(`http://localhost:3000/card/${id}`,{
+      method: 'DELETE'
+    })
+    .then((res) => res.json())
+    .then((data) =>{
+      console.log(data)
+      refetch()
+    })
+    
   }
 
   return (
@@ -41,7 +49,7 @@ const Carts = () => {
             </thead>
             <tbody>
               {
-                card.map((item, index) =><tr key={item._id}>
+                carts.map((item, index) =><tr key={item._id}>
                 <td>{++index}</td>
                 <td>
                   <div className="avatar">
@@ -76,7 +84,7 @@ const Carts = () => {
           </ul>
           <ul className="w-1/2 text-left">
             <li><h1 className="text-xl font-bold">Shopping Details</h1></li>
-            <li>Total Items : {card?.length}</li>
+            <li>Total Items : {carts?.length}</li>
             <li>Total Price : ${sumWithInitial}</li>
             <li><button className="btn btn-success text-white">Procceed to Checkout</button></li>
           </ul>

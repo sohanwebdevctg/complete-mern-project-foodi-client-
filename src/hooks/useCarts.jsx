@@ -2,10 +2,10 @@ import  { useContext } from 'react';
 import { AuthContext } from '../Context/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 
-const useCard = () => {
+const useCarts = () => {
   const {user} = useContext(AuthContext);
 
-  const {data : card = [], refetch} = useQuery({
+  const {data : carts = [], refetch} = useQuery({
     queryKey: ['card', user?.email],
     queryFn: async () => {
       const response = await fetch(`http://localhost:3000/card?email=${user?.email}`)
@@ -13,7 +13,7 @@ const useCard = () => {
     },
   })
 
-  return [card, refetch];
+  return [carts, refetch];
 };
 
-export default useCard;
+export default useCarts;

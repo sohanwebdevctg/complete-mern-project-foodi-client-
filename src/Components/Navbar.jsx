@@ -4,13 +4,13 @@ import Login from './Login';
 import { AuthContext } from '../Context/AuthProvider';
 import { useContext } from 'react';
 import DrawerLink from './DrawerLink';
-import useCard from '../hooks/useCard';
+import useCarts from '../hooks/useCarts';
 
 const Navbar = () => {
 
   // auth context data
     const {user} = useContext(AuthContext);
-    const [card] = useCard();
+    const [carts] = useCarts();
 
   const navLink = (
     <>
@@ -113,7 +113,7 @@ const Navbar = () => {
                 strokeWidth="2"
                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
-            <span className="badge badge-sm indicator-item">{card && card.length > 0 ? card.length : 0}</span>
+            <span className="badge badge-sm indicator-item">{carts && carts.length > 0 ? carts.length : 0}</span>
           </div>
           </Link>
           </div>
