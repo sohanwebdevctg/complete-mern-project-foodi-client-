@@ -22,7 +22,43 @@ const Carts = () => {
       console.log(data)
       refetch()
     })
-    
+  }
+
+  const incrementBtn = (item) => {
+    const data = item.quantity + 1;
+    fetch(`http://localhost:3000/card/${item._id}`,{
+      method: 'PATCH',
+      headers : {
+        'content-type' : 'application/json'
+      },
+      body : JSON.stringify({quantity : data})
+    })
+    .then((res) => res.json())
+    .then((data) =>{
+      console.log(data)
+      refetch()
+    })
+  }
+
+  const decrementBtn = (item) => {
+    let data;
+    if(item.quantity === 1){
+      alert('sorry')
+    }else{
+      data = item.quantity - 1
+    }
+    fetch(`http://localhost:3000/card/${item._id}`,{
+      method: 'PATCH',
+      headers : {
+        'content-type' : 'application/json'
+      },
+      body : JSON.stringify({quantity : data})
+    })
+    .then((res) => res.json())
+    .then((data) =>{
+      console.log(data)
+      refetch()
+    })
   }
 
   return (
@@ -62,8 +98,12 @@ const Carts = () => {
                   </div>
                 </td>
                 <td>{item?.recipe.slice(0,25)}</td>
-                <td>{item?.quantity}</td>
-                <td>{item?.price}</td>
+                <td>
+                <button onClick={() => incrementBtn(item)} className="btn btn-error btn-xs text-white">+</button>
+                  <span>{item?.quantity}</span>
+                  <button onClick={() => decrementBtn(item)} className="btn btn-error btn-xs text-white">-</button>
+                </td>
+                <td><span>{item?.price}</span></td>
                 <th>
                   <button onClick={() => deleteBtn(item._id)} className="btn btn-error btn-xs text-white">Delete</button>
                 </th>
