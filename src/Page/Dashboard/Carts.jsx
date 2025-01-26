@@ -7,12 +7,14 @@ const Carts = () => {
 
   const {user} = useContext(AuthContext);
 
+  // get all cats data from hooks useCarts
   const [carts,refetch] = useCarts();
   const sumWithInitial = carts.reduce(
     (accumulator, currentValue) => accumulator + currentValue.price,
     0,
   );
 
+  // delete single carts
   const deleteBtn = (id) => {
     fetch(`http://localhost:3000/card/${id}`,{
       method: 'DELETE'
@@ -24,6 +26,7 @@ const Carts = () => {
     })
   }
 
+  // increment single quantity
   const incrementBtn = (item) => {
     const data = item.quantity + 1;
     fetch(`http://localhost:3000/card/${item._id}`,{
@@ -40,6 +43,7 @@ const Carts = () => {
     })
   }
 
+  // decrement single quantity
   const decrementBtn = (item) => {
     let data;
     if(item.quantity === 1){
