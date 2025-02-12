@@ -1,12 +1,13 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import useAxiosSecure from "../hook/useAxiosSecure";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useQuery } from '@tanstack/react-query'
 
 // context start
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
@@ -29,6 +30,16 @@ const AuthProvider = ({ children }) => {
       }
     });
   };
+
+  // set user data from server
+  const {data, refetch } = useQuery({
+    queryKey: ['user'],
+    queryFn: async () => {
+    const res = await axiosSecure.get('/user/profile')
+      setUser(res.data)
+      refetch()
+    }
+  })
 
   const userInfo = { user, setUser, loading, setLoading, logoutBtn };
 

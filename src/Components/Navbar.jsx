@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom';
 import logo from '/logo.png'
+import useAuth from './../hook/useAuth';
 
 const Navbar = () => {
 
+  // context
+  const {user} = useAuth()
+
+  // navLinks here
   const navLink = (
     <>
       <li>
@@ -84,13 +89,14 @@ const Navbar = () => {
           </div>
           {/* carts end */}
           {/* profile and login start */}
-          <Link to="/dashboard/profile">
+          {
+            user && user?.email ? <Link to="/dashboard/profile">
             <img
             className='w-10 h-10 rounded-full'
               alt="Tailwind CSS Navbar component"
               src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-          </Link>
-          <Link to="/login"><button className="py-2 px-4 bg-green-500 hover:bg-green-500 text-white rounded-3xl">Login</button></Link>
+          </Link> : <Link to="/login"><button className="py-2 px-4 bg-green-500 hover:bg-green-500 text-white rounded-3xl">Login</button></Link>
+          }
           {/* profile and login end */}
         </div>
       </div>
