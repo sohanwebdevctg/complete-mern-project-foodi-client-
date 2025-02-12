@@ -8,6 +8,7 @@ import Carts from "../Page/Dashboard/Carts";
 import Login from "../Components/Login";
 import Dashboard from "../Main/Dashboard";
 import AllUser from "../Page/Dashboard/AllUser";
+import UpdateProfile from "../Page/Dashboard/UpdateProfile";
 
 
 
@@ -37,7 +38,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path : 'updateProfile',
-        element : <Profile></Profile>
+        element : <UpdateProfile></UpdateProfile>
       },
       {
         path : 'allUser',
