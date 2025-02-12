@@ -1,17 +1,19 @@
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
 
 const Signup = () => {
 
+  // react-hook-form
+  const { register,reset, handleSubmit, formState: { errors }} = useForm()
 
-  const { register, handleSubmit, formState: { errors }} = useForm()
-
+  // submit data
   const onSubmit = (data) => {
     const name = data.name;
     const email = data.email;
     const password = data.password;
-
 
     // image setting
     const image = data.image[0];
@@ -35,8 +37,15 @@ const Signup = () => {
         image : imageUrl
       })
       .then((res) => {
-        if(res.data.status === 200){
-          alert('success')
+        if(res.data){
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `${res.data.message}`,
+            showConfirmButton: false,
+            timer: 1500
+          });
+          reset();
         }
       })
       .catch((error) => {
