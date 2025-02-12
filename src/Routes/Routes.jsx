@@ -10,6 +10,8 @@ import AllUser from "../Page/Dashboard/AllUser";
 import UpdateProfile from "../Page/Dashboard/UpdateProfile";
 import AddMenu from "../Page/Dashboard/AddMenu";
 import UpdateMenu from "../Page/Dashboard/UpdateMenu";
+import AllMenu from "../Page/Dashboard/AllMenu";
+import Profile from "../Page/Dashboard/Profile";
 
 
 
@@ -39,7 +41,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path : 'profile',
-        element : <UpdateProfile></UpdateProfile>
+        element : <Profile></Profile>
       },
       {
         path : 'updateProfile',
@@ -48,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path : 'addMenu',
         element : <AddMenu></AddMenu>
+      },
+      {
+        path : 'allMenu',
+        element : <AllMenu></AllMenu>
       },
       {
         path : 'updateMenu',
