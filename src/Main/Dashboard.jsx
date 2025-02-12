@@ -17,9 +17,9 @@ const Dashboard = () => {
       {/* Sidebar content here */}
       <li><Link to="/dashboard/profile">Profile</Link></li>
       <li><Link to="/dashboard/updateProfile">UpdateProfile</Link></li>
-      <li><Link to="/dashboard">AddMenu</Link></li>
+      <li><Link to="/dashboard/addMenu">AddMenu</Link></li>
       <li><Link to="/dashboard">AllMenu</Link></li>
-      <li><Link to="/dashboard">UpdateMenu</Link></li>
+      <li><Link to="/dashboard/updateMenu">UpdateMenu</Link></li>
       <li><Link to="/dashboard/allUser">AllUser</Link></li>
       <li><Link to="/carts">Carts</Link></li>
       <li><div className="divider w-full"></div></li>
