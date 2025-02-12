@@ -62,6 +62,7 @@ const Navbar = () => {
 
         
         <div className="navbar-end flex gap-2 items-center">
+          {/* carts start */}
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <Link to="/carts">
             <div className="indicator">
@@ -81,8 +82,16 @@ const Navbar = () => {
             </div>
             </Link>
           </div>
-
+          {/* carts end */}
+          {/* profile and login start */}
+          <Link to="/dashboard/profile">
+            <img
+            className='w-10 h-10 rounded-full'
+              alt="Tailwind CSS Navbar component"
+              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+          </Link>
           <Link to="/login"><button className="py-2 px-4 bg-green-500 hover:bg-green-500 text-white rounded-3xl">Login</button></Link>
+          {/* profile and login end */}
         </div>
       </div>
       {/* content section end */}

@@ -37,6 +37,10 @@ export const router = createBrowserRouter([
     element: <Dashboard></Dashboard>,
     children: [
       {
+        path : 'profile',
+        element : <UpdateProfile></UpdateProfile>
+      },
+      {
         path : 'updateProfile',
         element : <UpdateProfile></UpdateProfile>
       },
