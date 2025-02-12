@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 
 const Signup = () => {
+
+  // navigate
+  const navigate = useNavigate()
 
   // react-hook-form
   const { register,reset, handleSubmit, formState: { errors }} = useForm()
@@ -38,6 +41,9 @@ const Signup = () => {
       })
       .then((res) => {
         if(res.data){
+          // reset all data
+          reset();
+          // show success message
           Swal.fire({
             position: "center",
             icon: "success",
@@ -45,7 +51,8 @@ const Signup = () => {
             showConfirmButton: false,
             timer: 1500
           });
-          reset();
+          // navigate another page
+          navigate('/login');
         }
       })
       .catch((error) => {
