@@ -1,13 +1,14 @@
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../hook/useAxiosSecure';
 
 
 const Signup = () => {
 
   // navigate
   const navigate = useNavigate()
+  const axiosSecure = useAxiosSecure()
 
   // react-hook-form
   const { register,reset, handleSubmit, formState: { errors }} = useForm()
@@ -33,7 +34,7 @@ const Signup = () => {
       const imageUrl = data.data.display_url;
       
       // post user data in server
-      axios.post('http://localhost:3000/api/v1/user/register',{
+      axiosSecure.post('/user/register',{
         name : name,
         email : email,
         password : password,
