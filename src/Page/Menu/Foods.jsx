@@ -7,7 +7,7 @@ const Foods = () => {
 
   useEffect(() => {
     const getMenuData = async () => {
-      const response = await fetch("http://localhost:3000/menu")
+      const response = await fetch("cart.json")
       const menus = await response.json()
       setRecipes(menus);
       setFilterData(menus)

@@ -1,69 +1,19 @@
-import { useContext } from "react";
-import { AuthContext } from './../../Context/AuthProvider';
-import useCarts from "../../hooks/useCarts";
+
 
 
 const Carts = () => {
 
-  const {user} = useContext(AuthContext);
 
-  // get all cats data from hooks useCarts
-  const [carts,refetch] = useCarts();
-  const sumWithInitial = carts.reduce(
-    (accumulator, currentValue) => accumulator + currentValue.price,
-    0,
-  );
-
-  // delete single carts
-  const deleteBtn = (id) => {
-    fetch(`http://localhost:3000/card/${id}`,{
-      method: 'DELETE'
-    })
-    .then((res) => res.json())
-    .then((data) =>{
-      console.log(data)
-      refetch()
-    })
+  // quantityIncrement
+  const quantityInc = (data) => {
+    console.log(data)
   }
 
-  // increment single quantity
-  const incrementBtn = (item) => {
-    const data = item.quantity + 1;
-    fetch(`http://localhost:3000/card/${item._id}`,{
-      method: 'PATCH',
-      headers : {
-        'content-type' : 'application/json'
-      },
-      body : JSON.stringify({quantity : data})
-    })
-    .then((res) => res.json())
-    .then((data) =>{
-      console.log(data)
-      refetch()
-    })
+  // quantityDecrement
+  const quantityDec = (data) => {
+    console.log(data)
   }
 
-  // decrement single quantity
-  const decrementBtn = (item) => {
-    let data;
-    if(item.quantity === 1){
-      alert('sorry')
-    }else{
-      data = item.quantity - 1
-    }
-    fetch(`http://localhost:3000/card/${item._id}`,{
-      method: 'PATCH',
-      headers : {
-        'content-type' : 'application/json'
-      },
-      body : JSON.stringify({quantity : data})
-    })
-    .then((res) => res.json())
-    .then((data) =>{
-      console.log(data)
-      refetch()
-    })
-  }
 
   return (
     <div className="hero bg-base-200 min-h-screen">
@@ -88,31 +38,30 @@ const Carts = () => {
               </tr>
             </thead>
             <tbody>
-              {
-                carts.map((item, index) =><tr key={item._id}>
-                <td>{++index}</td>
+                <tr>
+                <td>1</td>
                 <td>
                   <div className="avatar">
                     <div className="mask mask-squircle h-12 w-12">
                       <img
-                        src={item?.image}
+                        src=""
                         alt="Avatar Tailwind CSS Component"
                       />
                     </div>
                   </div>
                 </td>
-                <td>{item?.recipe.slice(0,25)}</td>
+                <td>lkd</td>
                 <td>
-                <button onClick={() => incrementBtn(item)} className="btn btn-error btn-xs text-white">+</button>
-                  <span>{item?.quantity}</span>
-                  <button onClick={() => decrementBtn(item)} className="btn btn-error btn-xs text-white">-</button>
+                <button onClick={() => {quantityInc(1)}} className="btn btn-error btn-xs text-white">+</button>
+                  <span>2</span>
+                  <button onClick={() => {quantityDec(1)}} className="btn btn-error btn-xs text-white">-</button>
                 </td>
-                <td><span>{item?.price}</span></td>
+                <td><span>39</span></td>
                 <th>
-                  <button onClick={() => deleteBtn(item._id)} className="btn btn-error btn-xs text-white">Delete</button>
+                  <button className="btn btn-error btn-xs text-white">Delete</button>
                 </th>
-              </tr>)
-              }
+              </tr>
+              
 
             </tbody>
           </table>
@@ -122,14 +71,14 @@ const Carts = () => {
         <div className="flex items-center w-full">
           <ul className="w-1/2 text-left">
             <li><h1 className="text-xl font-bold">Customer Details</h1></li>
-            <li>Name : {user?.name}</li>
-            <li>Email : {user?.email}</li>
+            <li>Name : </li>
+            <li>Email : </li>
             <li>UserId : 94ij</li>
           </ul>
           <ul className="w-1/2 text-left">
             <li><h1 className="text-xl font-bold">Shopping Details</h1></li>
-            <li>Total Items : {carts?.length}</li>
-            <li>Total Price : ${sumWithInitial}</li>
+            <li>Total Items : </li>
+            <li>Total Price : $</li>
             <li><button className="btn btn-success text-white">Procceed to Checkout</button></li>
           </ul>
         </div>

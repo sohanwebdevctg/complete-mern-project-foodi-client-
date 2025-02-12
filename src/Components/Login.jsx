@@ -1,65 +1,34 @@
-import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../Context/AuthProvider";
-import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+
 
 const Login = () => {
 
-  // auth context data
-  const {user} = useContext(AuthContext)
-
-  const navigate = useNavigate();
-
-  // react hook data
-  const {register,handleSubmit,formState: { errors }} = useForm()
-
-  const onSubmit = (data) => {
-    const email = data.email;
-    const password = data.password;
-    if(user.email === email && user.password === password){
-      document.getElementById('my_modal_1').close();
-      console.log('success')
-      window.location.reload()
-      navigate('/')
-    }
-  }
-
   return (
-    <div>
-      <dialog id="my_modal_1" className="modal">
-        <div className="modal-box">
-          <div className="modal-action mt-0">
-            {/* login form */}
-            <form className="card-body p-2" onSubmit={handleSubmit(onSubmit)}>
-          <h3 className="font-bold text-lg">Please Login!</h3>
+<div className="hero bg-base-200 min-h-screen w-full">
+  <div className="hero-content w-full">
+    <div className="card bg-base-100 w-1/2 shadow-2xl">
+      <form className="card-body" >
+        <h3 className="font-bold text-lg">Please Login!</h3>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Email</span>
           </label>
-          <input type="email" placeholder="email" className="input input-bordered" {...register("email")}/>
-          {errors.email && <span>Email Must be required</span>}
+          <input type="email" placeholder="enter your email" className="input input-bordered" />
         </div>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Password</span>
           </label>
-          <input type="password" placeholder="password" className="input input-bordered" {...register("password")} />
-          {errors.password && <span>Password Must be required</span>}
+          <input type="password" placeholder="password" className="input input-bordered" />
         </div>
-        <div className="form-control mt-6">
-              <button type="submit" method="dialog" className="btn bg-green-500 hover:bg-green-500 text-white w-full">Login</button>
-        <form >
-              {/* if there is a button in form, it will close the modal */}
-            </form>
+        <div className="form-control mt-3">
+          <button className="btn bg-green-500 hover:bg-green-500 text-white">LogIn</button>
         </div>
-        <p className="mx-auto">Don't have an account? <Link to="/signup" className="text-red-500">Signup</Link></p>
+        <p className="mx-auto">Create an account? <Link to="/signup" className="text-red-500">SignUp</Link></p>
       </form>
-            {/* login form */}
-            
-          </div>
-        </div>
-      </dialog>
     </div>
+  </div>
+</div>
   );
 };
 

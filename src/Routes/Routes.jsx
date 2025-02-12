@@ -4,8 +4,10 @@ import Home from "../Page/Home/Home";
 import Menu from "../Page/Menu/Menu";
 import Signup from "../Components/Signup";
 import Profile from "../Page/Dashboard/Profile";
-import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Carts from "../Page/Dashboard/Carts";
+import Login from "../Components/Login";
+import Dashboard from "../Main/Dashboard";
+import AllUser from "../Page/Dashboard/AllUser";
 
 
 
@@ -22,15 +24,30 @@ export const router = createBrowserRouter([
         path : '/menu',
         element : <Menu></Menu>
       },
-      {
-        path : '/profile',
-        element : <PrivateRoute><Profile></Profile></PrivateRoute>
-      },
+
       {
         path : '/carts',
-        element : <PrivateRoute><Carts></Carts></PrivateRoute>
+        element :<Carts></Carts>
       },
     ]
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path : 'updateProfile',
+        element : <Profile></Profile>
+      },
+      {
+        path : 'allUser',
+        element : <AllUser></AllUser>
+      },
+    ]
+  },
+  {
+    path : '/login',
+    element : <Login></Login>
   },
   {
     path : '/signup',

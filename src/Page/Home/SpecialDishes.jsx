@@ -5,8 +5,9 @@ const SpecialDishes = () => {
 
   const [recipes, setRecipes] = useState([])
 
+  
   useEffect(() => {
-    fetch('./menu.json')
+    fetch('./cart.json')
     .then((res) => res.json())
     .then((data) => {
       const popular = data.filter((item) => item.category === "popular")

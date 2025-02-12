@@ -1,12 +1,12 @@
 import { createContext, useState } from "react";
-import { getUser } from "../localstorage/localstorage";
+
 
 
 export const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
 
-  const [user, setUser] = useState(getUser())
+  const [user, setUser] = useState("null")
   const [loading, setLoading] = useState(true)
 
   const userInfo = {user, setUser, loading, setLoading}

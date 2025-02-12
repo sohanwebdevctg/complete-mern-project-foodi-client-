@@ -1,16 +1,9 @@
 import { Link } from 'react-router-dom';
 import logo from '/logo.png'
 import Login from './Login';
-import { AuthContext } from '../Context/AuthProvider';
-import { useContext } from 'react';
-import DrawerLink from './DrawerLink';
-import useCarts from '../hooks/useCarts';
 
 const Navbar = () => {
 
-  // auth context data
-    const {user} = useContext(AuthContext);
-    const [carts] = useCarts();
 
   const navLink = (
     <>
@@ -18,26 +11,13 @@ const Navbar = () => {
               <Link to='/'>Home</Link>
             </li>
             <li>
-              <details>
-                <summary>Menu</summary>
-                <ul className="p-2">
-                  <li>
-                    <Link to="/menu">All</Link>
-                  </li>
-                  <li>
-                    <a>Salads</a>
-                  </li>
-                  <li>
-                    <a>Pizza</a>
-                  </li>
-                </ul>
-              </details>
+            <Link to="/menu">All</Link>
             </li>
             <li>
-              <a>Services</a>
+              <Link to="/">Services</Link>
             </li>
             <li>
-              <a>Offers</a>
+              <Link to="/">Offers</Link>
             </li>
     </>
   )
@@ -113,15 +93,11 @@ const Navbar = () => {
                 strokeWidth="2"
                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
-            <span className="badge badge-sm indicator-item">{carts && carts.length > 0 ? carts.length : 0}</span>
+            <span className="badge badge-sm indicator-item">0</span>
           </div>
           </Link>
           </div>
-          {
-            user ? <DrawerLink></DrawerLink> : <button onClick={()=>document.getElementById('my_modal_1').showModal()} className="py-2 px-4 bg-green-500 hover:bg-green-500 text-white rounded-3xl">Login</button> 
-          }
-          
-          <Login></Login>
+          <Link to="/login"><button className="py-2 px-4 bg-green-500 hover:bg-green-500 text-white rounded-3xl">Login</button></Link>
         </div>
       </div>
       {/* content section end */}
