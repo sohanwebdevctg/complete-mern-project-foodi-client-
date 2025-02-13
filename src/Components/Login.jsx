@@ -22,7 +22,8 @@ const Login = () => {
           axiosSecure.post('/user/login',{email : data?.email, password : data?.password})
           .then((res) => {
             if(res.data){
-              setUser(res.data)
+              // set user data in local storage
+              localStorage.setItem('user', JSON.stringify(res.data))
               // reset all data
               reset();
               // show success message

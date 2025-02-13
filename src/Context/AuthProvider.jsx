@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import useAxiosSecure from "../hook/useAxiosSecure";
 import Swal from "sweetalert2";
 
@@ -33,6 +33,16 @@ const AuthProvider = ({ children }) => {
       }
     });
   };
+
+  // get user information from local storage
+  useEffect(() => {
+    if(user === null){
+      const userInfo =  JSON.parse(localStorage.getItem('user'));
+      setUser(userInfo)
+    }else{
+      localStorage.clear()
+    }
+  },[user])
 
 
 
