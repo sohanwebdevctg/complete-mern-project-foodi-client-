@@ -1,16 +1,22 @@
 import { createContext, useEffect, useState } from "react";
 import useAxiosSecure from "../hook/useAxiosSecure";
 import Swal from "sweetalert2";
-import { useQuery } from '@tanstack/react-query'
+import useUser from "../hook/useUser";
+
 
 // context start
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
 
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
+  const [user, refetch] = useUser();
+  console.log(user)
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
+
+  
+  
   // const navigate = useNavigate();
 
   // logoutBtn function
@@ -31,17 +37,10 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  // set user data from server
-  const {data, refetch } = useQuery({
-    queryKey: ['user'],
-    queryFn: async () => {
-    const res = await axiosSecure.get('/user/profile')
-      setUser(res.data)
-      refetch()
-    }
-  })
 
-  const userInfo = { user, setUser, loading, setLoading, logoutBtn };
+
+
+  const userInfo = { user, loading, setLoading, logoutBtn };
 
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>
