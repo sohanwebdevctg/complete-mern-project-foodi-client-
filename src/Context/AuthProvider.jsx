@@ -1,7 +1,6 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import useAxiosSecure from "../hook/useAxiosSecure";
 import Swal from "sweetalert2";
-import useUser from "../hook/useUser";
 
 
 // context start
@@ -10,13 +9,11 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
 
   // const [user, setUser] = useState(null);
-  const [user, refetch] = useUser();
+  const [user, setUser] = useState(null);
   console.log(user)
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
 
-  
-  
   // const navigate = useNavigate();
 
   // logoutBtn function
@@ -40,7 +37,7 @@ const AuthProvider = ({ children }) => {
 
 
 
-  const userInfo = { user, loading, setLoading, logoutBtn };
+  const userInfo = { user, setUser, loading, setLoading, logoutBtn };
 
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>

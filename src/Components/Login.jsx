@@ -2,9 +2,13 @@ import { Link, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../hook/useAxiosSecure";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import useAuth from './../hook/useAuth';
 
 
 const Login = () => {
+
+  // context
+  const {setUser} = useAuth()
 
   // navigate
   const navigate = useNavigate()
@@ -18,6 +22,7 @@ const Login = () => {
           axiosSecure.post('/user/login',{email : data?.email, password : data?.password})
           .then((res) => {
             if(res.data){
+              setUser(res.data)
               // reset all data
               reset();
               // show success message

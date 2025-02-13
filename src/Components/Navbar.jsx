@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom';
 import logo from '/logo.png'
-import useAuth from './../hook/useAuth';
+import useAuth from '../hook/useAuth';
+
 
 const Navbar = () => {
-
-  // context
   const {user} = useAuth()
-
   // navLinks here
   const navLink = (
     <>
