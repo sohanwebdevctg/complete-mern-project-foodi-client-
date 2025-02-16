@@ -23,7 +23,6 @@ const Login = () => {
           .then((res) => {
             if(res.data){
               // set user data in local storage
-              localStorage.setItem('user', JSON.stringify(res.data))
               // reset all data
               reset();
               // show success message
@@ -32,7 +31,7 @@ const Login = () => {
                 icon: "success",
                 title: `${res.data.message}`,
                 showConfirmButton: false,
-                timer: 1500
+                timer: 1000
               });
               // navigate another page
               navigate('/');

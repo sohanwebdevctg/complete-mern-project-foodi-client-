@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import useAxiosSecure from "../hook/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 
 // context start
@@ -10,7 +11,6 @@ const AuthProvider = ({ children }) => {
 
   // const [user, setUser] = useState(null);
   const [user, setUser] = useState(null);
-  console.log(user)
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
 
@@ -29,19 +29,13 @@ const AuthProvider = ({ children }) => {
           timer: 1500,
         });
         // navigate another page
-        // navigate("/");
       }
     });
   };
 
   // get user information from local storage
   useEffect(() => {
-    if(user === null){
-      const userInfo =  JSON.parse(localStorage.getItem('user'));
-      setUser(userInfo)
-    }else{
-      localStorage.clear()
-    }
+
   },[user])
 
 
