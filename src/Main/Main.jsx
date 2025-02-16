@@ -12,7 +12,7 @@ const Main = () => {
   return (
     <>
     <div>
-      {loading === false ? <LoadingSpinner></LoadingSpinner> : <div>
+      {loading === true ? <LoadingSpinner></LoadingSpinner> : <div>
         <Navbar></Navbar>
       <div className="min-h-screen">
         <Outlet></Outlet>

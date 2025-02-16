@@ -1,14 +1,11 @@
 import { createContext, useEffect, useState } from "react";
-import useAxiosSecure from "../hook/useAxiosSecure";
 import Swal from "sweetalert2";
-import axios from "axios";
-
+import useAxiosSecure from "../hook/useAxiosSecure";
 
 // context start
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-
   // const [user, setUser] = useState(null);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -17,11 +14,11 @@ const AuthProvider = ({ children }) => {
   // const navigate = useNavigate();
 
   // logoutBtn function
-  const logoutBtn = () => {
-    axiosSecure.post("/user/logOut", {}).then((res) => {
+  const logoutBtn = async () => {
+    try {
+      const res = await axiosSecure.post("/user/logOut", {});
       if (res.data) {
-        setUser(null)
-        // show success message
+        setUser(null);
         Swal.fire({
           position: "center",
           icon: "success",
@@ -29,30 +26,30 @@ const AuthProvider = ({ children }) => {
           showConfirmButton: false,
           timer: 1500,
         });
-        // navigate another page
       }
-    });
+    } catch (error) {
+      console.log("Logout failed");
+    }
   };
 
   // get user information from local storage
-  useEffect(() => {
-
-    const fetchUser = async () => {
-      try{
-        await axiosSecure.get('/user/profile').then((res) => {
-          setUser(res.data)
-        })
-      }catch(error){
-        console.log("User not authenticated");
-      }
+  const fetchUser = async () => {
+    try {
+      const res = await axiosSecure.get("/user/profile");
+      setUser(res.data);
+    } catch (error) {
+      console.log("User not authenticated");
+      setUser(null);
+    } finally{
+      setLoading(false)
     }
-    fetchUser()
-  },[axiosSecure])
+  };
 
+  useEffect(() => {
+    fetchUser();
+  },[])
 
-
-
-  const userInfo = { user, setUser, loading, setLoading, logoutBtn };
+  const userInfo = { user, setUser, loading, setLoading, logoutBtn, fetchUser };
 
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>
