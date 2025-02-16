@@ -12,6 +12,7 @@ import AddMenu from "../Page/Dashboard/AddMenu";
 import UpdateMenu from "../Page/Dashboard/UpdateMenu";
 import AllMenu from "../Page/Dashboard/AllMenu";
 import Profile from "../Page/Dashboard/Profile";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 
 
@@ -37,7 +38,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
       {
         path : 'profile',
