@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../hook/useAxiosSecure";
 
+
 // context start
 export const AuthContext = createContext();
 
@@ -40,7 +41,7 @@ const AuthProvider = ({ children }) => {
     } catch (error) {
       console.log("User not authenticated");
       setUser(null);
-    } finally{
+    }finally{
       setLoading(false)
     }
   };
