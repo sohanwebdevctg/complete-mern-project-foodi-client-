@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import useAxiosSecure from "../hook/useAxiosSecure";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 // context start
@@ -20,6 +20,7 @@ const AuthProvider = ({ children }) => {
   const logoutBtn = () => {
     axiosSecure.post("/user/logOut", {}).then((res) => {
       if (res.data) {
+        setUser(null)
         // show success message
         Swal.fire({
           position: "center",
@@ -36,7 +37,17 @@ const AuthProvider = ({ children }) => {
   // get user information from local storage
   useEffect(() => {
 
-  },[user])
+    const fetchUser = async () => {
+      try{
+        await axiosSecure.get('/user/profile').then((res) => {
+          setUser(res.data)
+        })
+      }catch(error){
+        console.log("User not authenticated");
+      }
+    }
+    fetchUser()
+  },[axiosSecure])
 
 
 
