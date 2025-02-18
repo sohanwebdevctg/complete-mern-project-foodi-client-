@@ -8,6 +8,8 @@ const Dashboard = () => {
   // context
   const {user,logoutBtn} = useAuth();
 
+
+
   return (
     <div className="drawer drawer-open">
   <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
