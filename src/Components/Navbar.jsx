@@ -4,7 +4,10 @@ import useAuth from '../hook/useAuth';
 
 
 const Navbar = () => {
-  const {user} = useAuth()
+
+  // user data
+  const {user} = useAuth();
+
   // navLinks here
   const navLink = (
     <>
@@ -66,8 +69,8 @@ const Navbar = () => {
         
         <div className="navbar-end flex gap-2 items-center">
           {/* carts start */}
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <Link to="/carts">
+          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <div className="indicator">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -83,16 +86,17 @@ const Navbar = () => {
               </svg>
               <span className="badge badge-sm indicator-item">0</span>
             </div>
-            </Link>
           </div>
+            </Link>
           {/* carts end */}
           {/* profile and login start */}
           {
             user && user?.email ? <Link to="/dashboard/profile">
             <img
+            title={user?.name}
             className='w-10 h-10 rounded-full'
               alt="Tailwind CSS Navbar component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+              src={user?.image} />
           </Link> : <Link to="/login"><button className="py-2 px-4 bg-green-500 hover:bg-green-500 text-white rounded-3xl">Login</button></Link>
           }
           {/* profile and login end */}

@@ -6,9 +6,9 @@ import useAuth from "../hook/useAuth";
 const Dashboard = () => {
 
   // context
-  const {user,logoutBtn} = useAuth();
+  const {logoutBtn} = useAuth();
 
-
+  
 
   return (
     <div className="drawer drawer-open">
