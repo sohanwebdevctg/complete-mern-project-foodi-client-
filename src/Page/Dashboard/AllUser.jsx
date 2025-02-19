@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../hook/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 
 const AllUser = () => {
@@ -12,12 +13,25 @@ const AllUser = () => {
   const { data : users = [], refetch } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/user/allUsers')
+      const res = await axiosSecure.get('/user/allUsers/admin')
       return res.data;
     },
   })
 
-  console.log(users)
+  // deleteUser
+  const deleteUser = async (_id) => {
+    const res = await axiosSecure.delete(`/user/deleteSingleUser/admin/${_id}`);
+    if (res.data) {
+            refetch();
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: `${res.data.message}`,
+              showConfirmButton: false,
+              timer: 1000,
+            });
+          }
+  }
 
   return (
     <div className="hero bg-base-200 min-h-screen">
@@ -60,8 +74,7 @@ const AllUser = () => {
               <td>{user.email}</td>
               <td>{user.role}</td>
               <td>
-                <Link to="/dashboard/updateProfile"><button className="btn btn-success btn-xs text-white mr-1">Update</button></Link>
-                <button className="btn btn-error btn-xs text-white">Delete</button>
+                <button onClick={() => deleteUser(user._id)} className="btn btn-error btn-xs text-white">Delete</button>
               </td>
             </tr>
             
