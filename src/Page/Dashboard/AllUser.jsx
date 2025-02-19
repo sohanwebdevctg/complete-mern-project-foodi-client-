@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import useAxiosSecure from "../../hook/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { FaUsers, FaUserShield } from "react-icons/fa";
 
 
 const AllUser = () => {
@@ -15,7 +15,7 @@ const AllUser = () => {
     queryFn: async () => {
       const res = await axiosSecure.get('/user/allUsers/admin')
       return res.data;
-    },
+    }
   })
 
   // deleteUser
@@ -31,6 +31,23 @@ const AllUser = () => {
               timer: 1000,
             });
           }
+  }
+
+  // adminUser
+  const adminUser = async (user) => {
+    const res = await axiosSecure.patch(`/user/makeAdmin/admin/${user._id}`,{
+      role : "admin"
+    })
+    if (res.data) {
+      refetch();
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: `${res.data.message}`,
+        showConfirmButton: false,
+        timer: 1000,
+      });
+    }
   }
 
   return (
@@ -72,7 +89,7 @@ const AllUser = () => {
               </td>
               <td>{user.name}</td>
               <td>{user.email}</td>
-              <td>{user.role}</td>
+              <td>{user.role === "admin" ? <FaUserShield className="text-xl text-red-500"></FaUserShield> : <FaUsers onClick={() => adminUser(user)} className="text-xl text-green-500"></FaUsers>}</td>
               <td>
                 <button onClick={() => deleteUser(user._id)} className="btn btn-error btn-xs text-white">Delete</button>
               </td>
