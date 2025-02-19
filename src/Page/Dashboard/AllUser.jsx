@@ -1,7 +1,24 @@
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../hook/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 
 const AllUser = () => {
+
+  // allUsers data here
+  const axiosSecure = useAxiosSecure();
+
+  // allUsers data here
+  const { data : users = [], refetch } = useQuery({
+    queryKey: ['users'],
+    queryFn: async () => {
+      const res = await axiosSecure.get('/user/allUsers')
+      return res.data;
+    },
+  })
+
+  console.log(users)
+
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content text-center flex flex-col w-full">
@@ -24,30 +41,34 @@ const AllUser = () => {
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody>
-                <tr>
-                <td>1</td>
-                <td>
-                  <div className="avatar">
-                    <div className="mask mask-squircle h-12 w-12">
-                      <img
-                        src=""
-                        alt="Avatar Tailwind CSS Component"
-                      />
-                    </div>
+            {/* users data start */}
+            {
+              users.map((user,index) => <tbody key={index}>
+              <tr>
+              <td>{++index}</td>
+              <td>
+                <div className="avatar">
+                  <div className="mask mask-squircle h-12 w-12">
+                    <img
+                      src={user.image}
+                      alt="Avatar Tailwind CSS Component"
+                    />
                   </div>
-                </td>
-                <td>person1</td>
-                <td>person1@gmail.com</td>
-                <td>admin</td>
-                <td>
-                  <Link to="/dashboard/updateProfile"><button className="btn btn-success btn-xs text-white mr-1">Update</button></Link>
-                  <button className="btn btn-error btn-xs text-white">Delete</button>
-                </td>
-              </tr>
-              
+                </div>
+              </td>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>{user.role}</td>
+              <td>
+                <Link to="/dashboard/updateProfile"><button className="btn btn-success btn-xs text-white mr-1">Update</button></Link>
+                <button className="btn btn-error btn-xs text-white">Delete</button>
+              </td>
+            </tr>
+            
 
-            </tbody>
+          </tbody>)
+            }
+            {/* users data end */}
           </table>
         </div>
         {/* table end */}

@@ -8,7 +8,8 @@ const Dashboard = () => {
   // context
   const {logoutBtn} = useAuth();
 
-  
+  // admin role router
+  const idAdmin = true;
 
   return (
     <div className="drawer drawer-open">
@@ -25,11 +26,16 @@ const Dashboard = () => {
       {/* back-end start */}
       <li><Link to="/dashboard/profile">Profile</Link></li>
       <li><Link to="/dashboard/updateProfile">UpdateProfile</Link></li>
-      <li><Link to="/dashboard/addMenu">AddMenu</Link></li>
+      {
+        idAdmin ? <>
+          <li><Link to="/dashboard/addMenu">AddMenu</Link></li>
       <li><Link to="/dashboard/allMenu">AllMenu</Link></li>
       <li><Link to="/dashboard/updateMenu">UpdateMenu</Link></li>
       <li><Link to="/dashboard/allUser">AllUser</Link></li>
-      <li><Link to="/carts">Carts</Link></li>
+        </> : <>
+        <li><Link to="/carts">Carts</Link></li>
+        </>
+      }
       {/* back-end end */}
       <li><div className="divider w-full"></div></li>
       {/* front-end start */}
